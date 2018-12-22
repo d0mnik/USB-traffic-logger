@@ -4,7 +4,6 @@
 import psutil
 import inotify.adapters
 import sys
-import pyudev
 from multiprocessing import Process, Manager
 import datetime
 
