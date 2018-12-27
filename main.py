@@ -1,4 +1,5 @@
-#!/usr/bin/env python3.6
+#!venv/bin/python3.6
+#!/usr/bin/env python3
 
 # imports
 import psutil
@@ -32,6 +33,8 @@ def listener(mount,partition,control_list):
                 (_,type_names,path,filename) = event
                 if "IN_CREATE" in type_names:
                     delog.write(filename + " was created\n")
+                elif "IN_DELETE" in type_names:
+                    delog.write(filename + " was deleted\n")
             delog.close()
     except inotify.adapters.TerminalEventException: # on umount
         control_list.remove(partition)
