@@ -37,6 +37,7 @@ def listener(mount,partition,control_list):
                     delog.write(filename + " was deleted\n")
             delog.close()
     except inotify.adapters.TerminalEventException: # on umount
+        delog.close()
         control_list.remove(partition)
         return
     else:
