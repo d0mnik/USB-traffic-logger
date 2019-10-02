@@ -20,6 +20,10 @@ Simply run the script with python3 and you are good to go!
 
 The logs will reside in /root/Documents.
 
+## Future Works
+
+A windows version is currently being planned and written.
+
 ## Author
 
 Alloysius Goh
