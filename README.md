@@ -1,8 +1,8 @@
 # USB Traffic Loger
 
-This is a script written in python to track all files copied to a USB drive.
+This is a tool written in python to track all files copied to a USB drive.
 
-This script is made for fun as my friends and I were talking about how to track USB data and i decided to give it a shot.
+It can be used as a Data-Loss Prevention (DLP) program for Linux systems.
 
 ## Prerequisites
 
