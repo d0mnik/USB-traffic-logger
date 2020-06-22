@@ -26,30 +26,30 @@ def list_usb_devices():
 def listener(mount,partition,control_list):
     try:
         i = inotify.adapters.InotifyTree(mount)
-        with open("/root/Documents/{}.log".format(datetime.datetime.now().strftime("%Y%m%d-%H:%M:%S")),"w") as delog:
-            delog.write("USB data log for {} at {}\n\n".format(mount,datetime.datetime.now().isoformat()))
+        with open("/root/Documents/{}.log".format(datetime.datetime.now().strftime("%Y%m%d-%H:%M:%S")),"w") as debug_log:
+            debug_log.write("USB data log for {} at {}\n\n".format(mount,datetime.datetime.now().isoformat()))
             for event in i.event_gen(yield_nones=False):
                 (_,type_names,path,filename) = event
                 if "IN_CREATE" in type_names:
-                    delog.write(filename + " was created\n")
+                    debug_log.write(filename + " was created\n")
                 elif "IN_DELETE" in type_names:
-                    delog.write(filename + " was deleted\n")
-            delog.close()
+                    debug_log.write(filename + " was deleted\n")
+            debug_log.close()
     except inotify.adapters.TerminalEventException: # on umount
-        delog.close()
+        debug_log.close()
         control_list.remove(partition)
         return
     else:
         i = inotify.adapters.Inotify()
         i.add_watch(mount)
-        with open("/root/Documents/{}.log".format(datetime.datetime.now().strftime("%Y%m%d-%H:%M:%S") + mount),"w") as delog:
-            delog.write("USB data log for {} at {}\n\n".format(mount,datetime.datetime.now().isoformat()))
+        with open("/root/Documents/{}.log".format(datetime.datetime.now().strftime("%Y%m%d-%H:%M:%S") + mount),"w") as debug_log:
+            debug_log.write("USB data log for {} at {}\n\n".format(mount,datetime.datetime.now().isoformat()))
             for event in i.event_gen(yield_nones=False):
                 (_,type_names,path,filename) = event
                 #print("Path: {} filename: {} event_type: {}".format(path,filename,type_names))
                 if "IN_CREATE" in type_names:
-                    delog.write(filename + " was created\n")
-            delog.close()
+                    debug_log.write(filename + " was created\n")
+            debug_log.close()
 def main():
     manager = Manager()
     control_devices = manager.list([])
@@ -62,4 +62,3 @@ def main():
             p.start()
 if __name__ == "__main__":
     main()
-    #test()
